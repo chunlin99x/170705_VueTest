@@ -3,6 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <title>07_Class与Style绑定</title>
+  <style>
+    .classA {
+      background: blue;
+    }
+    .classB {
+      color: red;
+    }
+
+    .xxx {
+      font-size: 15px;
+    }
+  </style>
 </head>
 <body>
 
@@ -21,14 +33,37 @@
 
 <div id="demo">
   <h2>2. class绑定: :class='xxx'</h2>
-
+  <p class="xxx" :class="myClass">xxx的值是字符串: 'classA'</p>
+  <p :class="{classA: isA, classB: isB}">xxx的值是对象: {classA:isA, classB: isB}</p>
+  <p :class="['classA', 'classB']">xxx的值是数组: ['classA', 'classB']</p>
   <h2>3. style绑定</h2>
+  <p :style="{color: myColor, fontSize: fontSize+'px'}">style绑定</p>
 
+
+  <button @click="update">更新</button>
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
-
+  new Vue({
+    el : '#demo',
+    data : {
+      myClass: 'classA',
+      isA: true,
+      isB: false,
+      myColor: 'yellow',
+      fontSize: 20
+    },
+    methods: {
+      update () {
+        this.myClass = 'classB'
+        this.isA = false
+        this.isB = true
+        this.myColor = 'pink'
+        this.fontSize = 30
+      }
+    }
+  })
 </script>
 </body>
 </html>
