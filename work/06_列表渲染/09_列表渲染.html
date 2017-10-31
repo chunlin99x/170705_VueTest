@@ -24,14 +24,45 @@
     ]
   -->
   <h2>测试: v-for 遍历数组</h2>
-
+  <ul>
+    <li v-for="(p, index) in persons" :key="index">
+      {{index}}---{{p.name}}---{{p.age}}
+      ---<button @click="deleteItem(index)">删除</button>
+      ---<button @click="updateItem(index, {id: 4, name:'Cat', age: 15})">替换更新</button>
+    </li>
+  </ul>
   <h2>测试: v-for 遍历对象</h2>
-
+  <ul>
+    <li v-for="(item, key) in persons[1]">
+      {{key}}---{{item}}
+    </li>
+  </ul>
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
 
+  new Vue({
+    el : '#demo',
+    data : {
+      persons: [
+        {id: 1, name: 'Tom', age: 13},
+        {id: 2, name: 'Jack', age: 12},
+        {id: 3, name: 'Bob', age: 14}
+      ]
+    },
+    methods : {
+      deleteItem(index) {
+        this.persons.splice(index, 1) // 数组的方法不再是原生的, 而是包装(调用原生的, 更新界面)
+      },
+
+      updateItem(index, newP) {
+        // this.persons = []
+        // this.persons[index] = newP  // vue框架不知道变化了
+        this.persons.splice(index, 1, newP)
+      }
+    }
+  })
 </script>
 </body>
 </html>

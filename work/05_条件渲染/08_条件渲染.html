@@ -13,11 +13,25 @@
 2. 比较v-if与v-show
   如果需要频繁切换 v-show 较好，如果在运行时条件不大可能改变 v-if 较好
 -->
+<div id="demo">
+  <p v-if="ok">成功了..</p>
+  <p v-else>失败了...</p>
+
+  <p v-show="ok">我成功了</p>
+  <p v-show="!ok">我失败了</p>
+
+  <button @click="ok=!ok">切换</button>
+</div>
 
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
-
+  new Vue({
+    el : '#demo',
+    data : {
+      ok: true
+    }
+  })
 </script>
 </body>
 </html>
