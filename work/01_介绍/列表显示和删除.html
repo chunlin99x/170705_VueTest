@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>列表显示和删除</title>
+</head>
+<body>
+  <div id="test">
+    <ul>
+      <li v-for="(todo, index) in todos">
+        {{todo.title}}
+        <button v-on:click="deleteTodo(index)">X</button>
+      </li>
+    </ul>
+  </div>
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+  new Vue({
+    el: '#test',
+    data: {
+      todos: [
+        {title: '吃饭'},
+        {title: '睡觉'},
+        {title: '打代码'},
+      ]
+    },
+    methods: {
+      deleteTodo (index) {
+        this.todos.splice(index, 1)
+      }
+    }
+  })
+</script>
+</body>
+</html>
