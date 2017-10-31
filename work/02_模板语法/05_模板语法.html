@@ -9,8 +9,8 @@
 1. 模板的理解:
   动态的html页面
   包含了一些JS语法代码
-    双大括号表达式
-    指令(以v-开头的自定义标签属性)
+    双大括号表达式：{{表达式}}
+    指令(以v-开头的自定义标签属性): v-for="表达式"
 2. 双大括号表达式
   语法: {{exp}} 或 {{{exp}}}
   功能: 向页面输出数据
@@ -34,16 +34,34 @@
 
   <div id="app">
     <h2>2. 双大括号表达式</h2>
-
+    <p>{{msg}}</p>
+    <p>{{msg.toUpperCase()}}</p>
     <h2>3. 指令一: 强制数据绑定</h2>
+    <a v-bind:href="url">尚硅谷</a><br>
+    <a :id="tt" :href="url">尚硅谷2</a><br>
 
     <h2>4. 指令二: 绑定事件监听</h2>
-
+    <input type="text" v-on:keyup.enter="handKeyUp">
+    <input type="text" @keyup.enter="handKeyUp">
   </div>
 
   <script type="text/javascript" src="../js/vue.js"></script>
   <script type="text/javascript">
+    new Vue({
+      el: '#app',
+      data: {
+        msg: 'I Like You',
+        url: 'http://www.atguigu.com',
+        tt: 'xxx'
+      },
 
+      methods: {
+        handKeyUp (event) {
+          alert(event.target.value)
+          // event.keyCode
+        }
+      }
+    })
   </script>
 </body>
 </html>
