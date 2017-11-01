@@ -30,7 +30,7 @@
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
   const vm = new Vue({
-    el: '#demo',
+   // el: '#demo',
     data: {
       msg: 'atguigu',
       isShow: true
@@ -85,6 +85,7 @@
     },
 
   })
+  vm.$mount('#demo')
   /*
   console.log(vm.msg, vm) // atguigu    // 代理读
   console.log(vm._data.msg)
