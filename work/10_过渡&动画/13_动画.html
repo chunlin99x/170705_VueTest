@@ -3,6 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <title>15_动画</title>
+  <style>
+    .fade-enter-active{
+      transition: all .5s
+    }
+    .fade-leave-active {
+      transition: all 2s
+    }
+    .fade-enter, .fade-leave-to {
+      opacity: 0;
+      transform: translateX(20px)
+    }
+  </style>
 </head>
 <body>
 <!--
@@ -16,10 +28,21 @@
   xxx-leave-active: 指定隐藏的transition
   xxx-enter: 指定隐藏时的样式
 -->
+  <div id="demo">
+    <button @click="isShow=!isShow">Toggle</button>
+    <transition name="fade">
+      <p v-if="isShow">Hello</p>
+    </transition>
 
+  </div>
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
-
+  new Vue({
+    el : '#demo',
+    data : {
+      isShow: true
+    }
+  })
 </script>
 </body>
 </html>
