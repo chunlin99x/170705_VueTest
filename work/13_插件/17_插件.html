@@ -6,9 +6,29 @@
 </head>
 <body>
 
-<script type="text/javascript" src="../js/vue.js"></script>
-<script type="text/javascript">
+<div id="test">
+  <p v-my-upper-text="msg"></p>
+</div>
 
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript" src="myPlugin.js"></script>
+<script type="text/javascript">
+  // 声明使用插件
+  Vue.use(MyPlugin)  // 内部会: MyPlugin.install(Vue)
+
+  Vue.myGlobalMethod()
+
+  const vm = new Vue({
+    el: '#test',
+    data: {
+      msg: 'I Like me'
+    },
+    methods: {},
+
+    computed: {}
+  })
+
+  vm.$myMethod()
 </script>
 </body>
 </html>
