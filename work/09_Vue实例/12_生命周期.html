@@ -5,8 +5,9 @@
   <title>12_生命周期</title>
 </head>
 <body>
-<div>
-
+<div id="demo">
+  <button @click="destroyVM">干掉VM</button>
+  <p v-show="isShow">{{msg}}</p>
 </div>
 
 <!--
@@ -28,7 +29,68 @@
 -->
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
+  const vm = new Vue({
+    el: '#demo',
+    data: {
+      msg: 'atguigu',
+      isShow: true
+    },
 
+    methods: {
+      destroyVM () {
+        console.log('destroyVM()')
+        this.$destroy()
+      }
+    },
+
+    beforeCreate() {
+      console.log('beforeCreate()', this.msg)
+    },
+    // 在此之间实现数据代理
+    created() {
+      console.log('created()')
+
+    },
+    // 在此之间编译模板
+    beforeMount() {
+      console.log('beforeMount()')
+    },
+    mounted() {
+      console.log('mounted()')
+      // 启动一个定时器
+      setTimeout(function () {
+        this.msg = 'baobao'
+      }.bind(this), 1000)
+      // 启动一个循环定时器
+      this.interalId = setInterval(() => {
+        console.log('-------')
+        this.isShow = !this.isShow
+      }, 1000)
+    },
+
+    beforeUpdate() {
+      console.log('beforeUpdate()')
+    },
+    updated() {
+      console.log('updated()')
+    },
+
+    beforeDestroy() {
+      console.log('beforeDestroy()')
+      // 清理定时器
+      clearInterval(this.interalId)
+    },
+    destroyed() {
+      console.log('destroyed()')
+    },
+
+  })
+  /*
+  console.log(vm.msg, vm) // atguigu    // 代理读
+  console.log(vm._data.msg)
+  vm.msg = 'xfzhang' // 数据保存到data中 // 代理写
+  console.log(vm._data.msg) // 'xfzhang'
+  */
 </script>
 </body>
 </html>
