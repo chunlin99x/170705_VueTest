@@ -20,11 +20,35 @@
     <div>{{myData | filterName(arg)}}</div>
 -->
 <!--需求: 对当前时间进行指定格式显示-->
-
+<div id="test">
+  <p>{{time | date-str}}</p>
+  <p>{{time | date-str('YYYY-MM-DD')}}</p>
+  <p>{{time | date-str('HH:mm:ss')}}</p>
+</div>
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript" src="https://cdn.bootcss.com/moment.js/2.19.0/moment.js"></script>
 <script>
 
+  // 注册全局过滤器
+  Vue.filter('date-str', function (value, format) {
+    format = format || 'YYYY-MM-DD HH:mm:ss'   // 简化if...else
+    // 返回处理后的值
+    return moment(value).format(format)
+  })
+
+  new Vue({
+    el : '#test',
+    data : {
+      time: new Date()
+    },
+    methods : {
+
+    },
+
+    computed : {
+
+    }
+  })
 </script>
 </body>
 </html>
