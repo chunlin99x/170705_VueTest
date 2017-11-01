@@ -14,46 +14,67 @@
 2. 失去焦点才更新: .lazy
 -->
 <div id="demo">
-  <input type="text"><br>
-  <textarea></textarea>
+  <p>msg: {{msg}}</p>
+  <input type="text" v-model="msg"><br><!--input.value-->
+  <textarea v-model="msg"></textarea>
 
   <hr>
-  <input type="checkbox" id="checkbox">
-  <label for="checkbox"></label>
+  <input type="checkbox" id="checkbox" v-model="ok"><!--input.checked-->
+  <label for="checkbox">{{ok}}</label>
 
   <hr>
-  <input type="checkbox" id="jack">
+  <input type="checkbox" id="jack" value="JACK" v-model="boyOrGirls">
   <label for="jack">Jack</label>
-  <input type="checkbox" id="john">
+  <input type="checkbox" id="john" value="JOHN" v-model="boyOrGirls">
   <label for="john">John</label>
-  <input type="checkbox" id="mike">
+  <input type="checkbox" id="mike" value="MIKE" v-model="boyOrGirls">
   <label for="mike">Mike</label>
   <br>
-  <span>Checked names:</span>
+  <span>Checked names: {{boyOrGirls}}</span>
 
   <hr>
-  <input type="radio" id="female">
-  <label for="female">MALE</label>
+  <input type="radio" id="male" value="male" v-model="sex">
+  <label for="male">MALE</label>
   <br>
-  <input type="radio" id="male">
-  <label for="male">FEMALE</label>
+  <input type="radio" id="female" value="female" v-model="sex">
+  <label for="female">FEMALE</label><!--ctrl+shift+X-->
   <br>
-  <span>Sex:</span>
+  <span>Sex:{{sex}}</span>
 
   <hr>
-  <select >
+  <select v-model="selectCityId">
     <option value="">未选择</option>
+    <option :value="city.id" v-for="(city, index) in citys" :key="index">{{city.name}}</option>
   </select>
-  <span>selection:</span>
+  <span>selection:{{selectCityId}}</span>
 
   <hr>
-  <input placeholder="失去焦点才更新">
-  <p>输入的数据为:</p>
+  <!--input的2种DOM事件: input/change-->
+  <input placeholder="失去焦点才更新" v-model.lazy="msg2">
+  <p>输入的数据为:{{msg2}}</p>
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
+  new Vue({
+    el : '#demo',
+    data : {
+      msg: 'atguigu',
+      ok: true,
+      boyOrGirls: [ "JOHN" ],
+      sex: 'female',
+      citys: [{id:1, name:'BJ'}, {id:2, name:'SZ'}, {id:3, name:'SH'}, {id:4, name:'HZ'}],
+      selectCityId: '1',
+      msg2: ''
+    },
+    methods : {
 
+    },
+
+    computed : {
+
+    }
+  })
 </script>
 </body>
 </html>
